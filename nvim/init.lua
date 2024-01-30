@@ -5,7 +5,7 @@ vim.g.maplocalleader = ' '
 -- [[ Setting options ]]
 
 -- highlight current line
-vim.o.cursorline = false
+vim.o.cursorline = true
 
 -- keep cursor near centre
 vim.o.scrolloff = 20
