@@ -211,6 +211,14 @@ vim.keymap.set('n', '<C-Right>', ":vertical resize +1<CR>", { silent = true, rem
 -- markdown previewer
 vim.keymap.set('n', '<leader>m', ":Glow<CR>", { silent = true, remap = false })
 
+-- toggle colorcolumn
+vim.keymap.set('n', '<leader>cc', function()
+  if vim.wo.cc == "101" then
+    vim.opt.colorcolumn = "0"
+  else
+    vim.opt.colorcolumn = "101"
+  end
+end, { desc = "Toggle colorcolumn on and off" })
 
 --color scheme
 vim.cmd.colorscheme 'catppuccin'
