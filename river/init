@@ -7,7 +7,6 @@ if [ ! $(pgrep "pipewire") ]; then
 
 fi
 
-pkill "easyeffects"
 pkill "wbg"
 pkill "mako"
 pkill "blueman-applet"
@@ -16,7 +15,6 @@ pkill "syncthing"
 pkill "udiskie"
 pkill -f "/usr/libexec/polkit-gnome-authentication-agent-1"
 
-# 	easyeffects --gapplication-service &
 wbg ~/Images/apocalypse.png &
 mako &
 blueman-applet &
