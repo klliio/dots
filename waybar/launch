@@ -1,7 +1,4 @@
 #!/bin/bash
 
-if [ $(pgrep "waybar") ]; then
-	pkill waybar
-fi
-
+pkill "waybar"
 waybar &> /dev/null & 
