@@ -19,6 +19,8 @@ font:
     family: Hack Nerd Font Mono
     style: Bold Italic
 
+  size: 14
+
 cursor:
     style:
       shape: Underline
