@@ -211,6 +211,9 @@ vim.keymap.set('n', '<C-Right>', ":vertical resize +1<CR>", { silent = true, rem
 -- markdown previewer
 vim.keymap.set('n', '<leader>m', ":Glow<CR>", { silent = true, remap = false })
 
+-- toggle formatting
+vim.keymap.set('n', '<leader>ft', ":FormatToggle<CR>", { silent = false, remap = false })
+
 -- toggle colorcolumn
 vim.keymap.set('n', '<leader>cc', function()
   if vim.wo.cc == "101" then
