@@ -1,0 +1,39 @@
+import = ["/home/klliio/.config/alacritty/catppuccin.toml"]
+
+[cursor]
+blink_interval = 500
+
+[cursor.style]
+blinking = "Always"
+shape = "Underline"
+
+[font]
+size = 14
+
+[font.bold]
+family = "Hack Nerd Font Mono"
+style = "Bold"
+
+[font.bold_italic]
+family = "Hack Nerd Font Mono"
+style = "Bold Italic"
+
+[font.italic]
+family = "Hack Nerd Font Mono"
+style = "Italic"
+
+[font.normal]
+family = "Hack Nerd Font Mono"
+style = "Regular"
+
+[scrolling]
+history = 10000
+
+[window]
+decorations_theme_variant = "None"
+dynamic_title = true
+opacity = 0.9
+
+[window.padding]
+x = 4
+y = 2
