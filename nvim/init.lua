@@ -155,23 +155,7 @@ require('lazy').setup({
 
 
   -- "gc" to comment visual regions/lines
-  { 'numToStr/Comment.nvim',         opts = {} },
-
-  -- Fuzzy Finder (files, lsp, etc)
-  { 'nvim-telescope/telescope.nvim', branch = '0.1.x', dependencies = { 'nvim-lua/plenary.nvim' } },
-
-  -- Fuzzy Finder Algorithm which requires local dependencies to be built.
-  -- Only load if `make` is available. Make sure you have the system
-  -- requirements installed.
-  {
-    'nvim-telescope/telescope-fzf-native.nvim',
-    -- NOTE: If you are having trouble with this installation,
-    --       refer to the README for telescope-fzf-native for more instructions.
-    build = 'make',
-    cond = function()
-      return vim.fn.executable 'make' == 1
-    end,
-  },
+  { 'numToStr/Comment.nvim', opts = {} },
 
   {
     -- Highlight, edit, and navigate code
@@ -227,16 +211,21 @@ end, { desc = "Toggle Colorcolumn" })
 
 --color scheme
 vim.cmd.colorscheme 'catppuccin'
-vim.cmd [[
-  hi Normal guibg=none ctermbg=none
-  hi LineNr guibg=none ctermbg=none
-  hi Folded guibg=none ctermbg=none
-  hi NonText guibg=none ctermbg=none
-  hi SpecialKey guibg=none ctermbg=none
-  hi VertSplit guibg=none ctermbg=none
-  hi SignColumn guibg=none ctermbg=none
-  hi EndOfBuffer guibg=none ctermbg=none
-]]
+local colors = require("catppuccin.palettes").get_palette()
+local TransparentColours = {
+  Normal = { none },
+  LineNr = { none },
+  Folded = { none },
+  NonText = { none },
+  SpecialKey = { none },
+  VertSplit = { none },
+  SignColumn = { none },
+  EndOfBuffer = { none },
+}
+
+for hl,col in pairs(TransparentColours) do
+  vim.api.nvim_set_hl(0, hl, col)
+end
 
 -- [[ Basic Keymaps ]]
 
@@ -259,45 +248,11 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   pattern = '*',
 })
 
--- [[ Configure Telescope ]]
--- See `:help telescope` and `:help telescope.setup()`
-require('telescope').setup {
-  defaults = {
-    mappings = {
-      i = {
-        ['<C-u>'] = false,
-        ['<C-d>'] = false,
-      },
-    },
-  },
-}
-
 -- cybu
 vim.keymap.set("n", "[b", "<Plug>(CybuPrev)", { desc = "Move to the Previous Buffer" })
 vim.keymap.set("n", "]b", "<Plug>(CybuNext)", { desc = "Move to the Next Buffer" })
 vim.keymap.set("n", "<s-tab>", "<plug>(CybuLastusedPrev)", { desc = "Move to the Previous Buffer" })
 vim.keymap.set("n", "<tab>", "<plug>(CybuLastusedNext)", { desc = "Move to the Next Buffer" })
-
--- Enable telescope fzf native, if installed
-pcall(require('telescope').load_extension, 'fzf')
-
--- See `:help telescope.builtin`
-vim.keymap.set('n', '<leader>?', require('telescope.builtin').oldfiles, { desc = 'Find Recently Opened Files' })
-vim.keymap.set('n', '<leader><space>', require('telescope.builtin').buffers, { desc = 'Find Existing Buffers' })
-vim.keymap.set('n', '<leader>/', function()
-  -- You can pass additional configuration to telescope to change theme, layout, etc.
-  require('telescope.builtin').current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
-    winblend = 10,
-    previewer = false,
-  })
-end, { desc = 'Fuzzily Search in Current Buffer' })
-
-vim.keymap.set('n', '<leader>gf', require('telescope.builtin').git_files, { desc = 'Search Git Files' })
-vim.keymap.set('n', '<leader>ff', require('telescope.builtin').find_files, { desc = 'Search Files' })
-vim.keymap.set('n', '<leader>sh', require('telescope.builtin').help_tags, { desc = 'Search Help' })
-vim.keymap.set('n', '<leader>sw', require('telescope.builtin').grep_string, { desc = 'Search Current Word' })
-vim.keymap.set('n', '<leader>sg', require('telescope.builtin').live_grep, { desc = 'Search by Grep' })
-vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { desc = 'Search Diagnostics' })
 
 -- [[ Configure Treesitter ]]
 -- See `:help nvim-treesitter`
