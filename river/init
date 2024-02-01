@@ -72,6 +72,7 @@ riverctl map normal Super+Shift Print spawn '~/.config/scripts/rofi-wf-recorder.
 riverctl map normal Super U spawn '~/.config/scripts/script-manager.sh'
 riverctl map normal Super E spawn '~/.config/scripts/file-editor.sh'
 riverctl map normal Super V spawn '~/.config/scripts/wireguard.sh'
+riverctl map normal Super I spawn '~/.config/scripts/images.sh'
 
 # workspaces/tags
 tagnum=9
