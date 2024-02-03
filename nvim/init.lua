@@ -187,11 +187,11 @@ vim.keymap.set('n', '<leader>yy', ':%y+<CR><CR>', { silent = true, remap = false
 vim.keymap.set('n', 'S-o', '^i<CR><Esc>k^i', { silent = true, remap = false, desc = "Insert Line Above]" })
 
 -- resize splits
-vim.keymap.set('n', '<C-Up>', ":resize -1<CR>", { silent = true, remap = false, desc = "Shrink the Window Horizontally" })
-vim.keymap.set('n', '<C-Down>', ":resize +1<CR>", { silent = true, remap = false, desc = "Grow the Window Horizontally" })
-vim.keymap.set('n', '<C-Left>', ":vertical resize -1<CR>",
+vim.keymap.set('n', '<M-Up>', ":resize -1<CR>", { silent = true, remap = false, desc = "Shrink the Window Horizontally" })
+vim.keymap.set('n', '<M-Down>', ":resize +1<CR>", { silent = true, remap = false, desc = "Grow the Window Horizontally" })
+vim.keymap.set('n', '<M-Left>', ":vertical resize -1<CR>",
   { silent = true, remap = false, desc = "Shrink the Window Vertically" })
-vim.keymap.set('n', '<C-Right>', ":vertical resize +1<CR>",
+vim.keymap.set('n', '<M-Right>', ":vertical resize +1<CR>",
   { silent = true, remap = false, desc = "Grow the Window Vertically" })
 
 -- markdown previewer
@@ -199,6 +199,12 @@ vim.keymap.set('n', '<leader>m', ":Glow<CR>", { silent = true, remap = false, de
 
 -- toggle formatting
 vim.keymap.set('n', '<leader>ft', ":FormatToggle<CR>", { silent = false, remap = false, desc = "Format Toggle" })
+
+-- move between splits
+vim.keymap.set('n', '<C-Up>', ":wincmd k<CR>", { silent = false, remap = false, desc = "Move up a split" })
+vim.keymap.set('n', '<C-Down>', ":wincmd j<CR>", { silent = false, remap = false, desc = "Move down a split" })
+vim.keymap.set('n', '<C-Left>', ":wincmd h<CR>", { silent = false, remap = false, desc = "Move left a split" })
+vim.keymap.set('n', '<C-Right>', ":wincmd l<CR>", { silent = false, remap = false, desc = "Move right a split" })
 
 -- toggle colorcolumn
 vim.keymap.set('n', '<leader>cc', function()
@@ -214,6 +220,7 @@ vim.cmd.colorscheme 'catppuccin'
 local colors = require("catppuccin.palettes").get_palette()
 local TransparentColours = {
   Normal = { none },
+  NormalNC = { none },
   LineNr = { none },
   Folded = { none },
   NonText = { none },
@@ -249,10 +256,10 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 })
 
 -- cybu
-vim.keymap.set("n", "[b", "<Plug>(CybuPrev)", { desc = "Move to the Previous Buffer" })
-vim.keymap.set("n", "]b", "<Plug>(CybuNext)", { desc = "Move to the Next Buffer" })
-vim.keymap.set("n", "<s-tab>", "<plug>(CybuLastusedPrev)", { desc = "Move to the Previous Buffer" })
-vim.keymap.set("n", "<tab>", "<plug>(CybuLastusedNext)", { desc = "Move to the Next Buffer" })
+vim.keymap.set("n", "<s-tab>", "<Plug>(CybuPrev)", { desc = "Move to the Previous Buffer" })
+vim.keymap.set("n", "<tab>", "<Plug>(CybuNext)", { desc = "Move to the Next Buffer" })
+vim.keymap.set("n", "[b", "<plug>(CybuLastusedPrev)", { desc = "Move to the Previous Buffer" })
+vim.keymap.set("n", "]b", "<plug>(CybuLastusedNext)", { desc = "Move to the Next Buffer" })
 
 -- [[ Configure Treesitter ]]
 -- See `:help nvim-treesitter`
