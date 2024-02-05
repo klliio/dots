@@ -14,9 +14,9 @@ return { {
 			},
 			presets = {
 				operators = false,
-				motions = true,
+				motions = false,
 				text_objects = false,
-				windows = true,
+				windows = false,
 				nav = true,
 				z = false,
 				g = false,
