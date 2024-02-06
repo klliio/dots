@@ -58,25 +58,6 @@ return {
 			-- Enable telescope fzf native, if installed
 			pcall(require('telescope').load_extension, 'fzf')
 
-			-- See `:help telescope.builtin`
-			vim.keymap.set('n', '<leader>?', require('telescope.builtin').oldfiles,
-				{ desc = 'Find Recently Opened Files' })
-			vim.keymap.set('n', '<leader><space>', require('telescope.builtin').buffers,
-				{ desc = 'Find Existing Buffers' })
-			vim.keymap.set('n', '<leader>/', function()
-				-- You can pass additional configuration to telescope to change theme, layout, etc.
-				require('telescope.builtin').current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
-					previewer = false,
-				})
-			end, { desc = 'Fuzzily Search in Current Buffer' })
-
-			vim.keymap.set('n', '<leader>gf', require('telescope.builtin').git_files, { desc = 'Search Git Files' })
-			vim.keymap.set('n', '<leader>ff', require('telescope.builtin').find_files, { desc = 'Search Files' })
-			vim.keymap.set('n', '<leader>sh', require('telescope.builtin').help_tags, { desc = 'Search Help' })
-			vim.keymap.set('n', '<leader>sw', require('telescope.builtin').grep_string, { desc = 'Search Current Word' })
-			vim.keymap.set('n', '<leader>sg', require('telescope.builtin').live_grep, { desc = 'Search by Grep' })
-			vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { desc = 'Search Diagnostics' })
-
 			local colors = require("catppuccin.palettes").get_palette()
 			local TelescopeColor = {
 				TelescopeMatching = { fg = colors.flamingo },
