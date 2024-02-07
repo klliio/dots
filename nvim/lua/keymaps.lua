@@ -65,11 +65,11 @@ vim.keymap.set('n', '<leader>yy', ':%y+<CR><CR>', { silent = true, remap = false
 vim.keymap.set('n', 'S-o', '^i<CR><Esc>k^i', { silent = true, remap = false, desc = "Insert Line Above]" })
 
 -- resize splits
-vim.keymap.set('n', '<M-Up>', ":resize -1<CR>", { silent = true, remap = false, desc = "Shrink the Window Horizontally" })
-vim.keymap.set('n', '<M-Down>', ":resize +1<CR>", { silent = true, remap = false, desc = "Grow the Window Horizontally" })
-vim.keymap.set('n', '<M-Left>', ":vertical resize -1<CR>",
+vim.keymap.set('n', '<C-Up>', ":resize -1<CR>", { silent = true, remap = false, desc = "Shrink the Window Horizontally" })
+vim.keymap.set('n', '<C-Down>', ":resize +1<CR>", { silent = true, remap = false, desc = "Grow the Window Horizontally" })
+vim.keymap.set('n', '<C-Left>', ":vertical resize -1<CR>",
     { silent = true, remap = false, desc = "Shrink the Window Vertically" })
-vim.keymap.set('n', '<M-Right>', ":vertical resize +1<CR>",
+vim.keymap.set('n', '<C-Right>', ":vertical resize +1<CR>",
     { silent = true, remap = false, desc = "Grow the Window Vertically" })
 
 -- markdown previewer
@@ -79,10 +79,10 @@ vim.keymap.set('n', '<leader>m', ":Glow<CR>", { silent = true, remap = false, de
 vim.keymap.set('n', '<leader>ft', ":FormatToggle<CR>", { silent = false, remap = false, desc = "Format Toggle" })
 
 -- move between splits
-vim.keymap.set('n', '<C-Up>', ":wincmd k<CR>", { silent = false, remap = false, desc = "Move up a split" })
-vim.keymap.set('n', '<C-Down>', ":wincmd j<CR>", { silent = false, remap = false, desc = "Move down a split" })
-vim.keymap.set('n', '<C-Left>', ":wincmd h<CR>", { silent = false, remap = false, desc = "Move left a split" })
-vim.keymap.set('n', '<C-Right>', ":wincmd l<CR>", { silent = false, remap = false, desc = "Move right a split" })
+vim.keymap.set('n', '<C-k>', ":wincmd k<CR>", { silent = false, remap = false, desc = "Move up a split" })
+vim.keymap.set('n', '<C-j>', ":wincmd j<CR>", { silent = false, remap = false, desc = "Move down a split" })
+vim.keymap.set('n', '<C-h>', ":wincmd h<CR>", { silent = false, remap = false, desc = "Move left a split" })
+vim.keymap.set('n', '<C-l>', ":wincmd l<CR>", { silent = false, remap = false, desc = "Move right a split" })
 
 -- toggle colorcolumn
 vim.keymap.set('n', '<leader>cc', function()
