@@ -49,7 +49,11 @@ mappings.leap = {
 }
 
 mappings.glow = {
-    ["<leader>m"] = { ":Glow<CR>", { silent = true, remap = false, desc = "Open Glow" } },
+    ["<leader>m"] = { function()
+        if (vim.bo.filetype == "markdown") then
+            vim.cmd("Glow")
+        end
+    end, { silent = true, remap = false, desc = "Open Glow" } },
 }
 
 mappings.gitsigns = {
