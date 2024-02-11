@@ -21,8 +21,10 @@ local mappings = require("keymaps")
 require("commands")
 
 for name, group in pairs(mappings) do
-    for lhs, rhs in pairs(group) do
-        vim.keymap.set("n", lhs, rhs[1], rhs[2])
+    if (name ~= "lsp" and name ~= "functions") then
+        for lhs, rhs in pairs(group) do
+            vim.keymap.set(lhs[1], lhs[2], rhs[1], rhs[2])
+        end
     end
 end
 
@@ -87,6 +89,7 @@ mason_lspconfig.setup_handlers {
     function(server_name)
         require('lspconfig')[server_name].setup {
             capabilities = capabilities,
+            on_attach = mappings.functions.lsp,
             settings = servers[server_name],
             filetypes = (servers[server_name] or {}).filetypes,
         }
