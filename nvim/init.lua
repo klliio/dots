@@ -59,10 +59,13 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 })
 
 local servers = {
+    prettierd = {},
+    shellcheck = {},
+    shellharden = {},
+    cpptools = {},
+    codelldb = {},
     clangd = {},
-    pyright = {},
     rust_analyzer = {},
-    bashls = {},
     lua_ls = {
         Lua = {
             workspace = { checkThirdParty = false },
