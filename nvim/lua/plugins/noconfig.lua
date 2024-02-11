@@ -4,7 +4,9 @@ return { {
     'tpope/vim-repeat',
     'ggandor/leap.nvim',
     'tpope/vim-repeat',
-
+    'folke/neodev.nvim',
+    'nvimtools/none-ls.nvim',
+    
     {
         -- LSP Configuration & Plugins
         'neovim/nvim-lspconfig',
