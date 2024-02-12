@@ -87,7 +87,13 @@ local servers = {
     cpptools = {},
     codelldb = {},
     clangd = {},
-    rust_analyzer = {},
+    rust_analyzer = {
+        ["rust-analyzer"] = {
+            checkOnSave = {
+                command = "clippy",
+            },
+        },
+    },
     lua_ls = {
         Lua = {
             workspace = { checkThirdParty = false },
