@@ -63,47 +63,58 @@ local null_ls = require("null-ls")
 null_ls.setup({
     sources = {
         -- sh
-        null_ls.builtins.formatting.shellharden,
-        null_ls.builtins.diagnostics.shellcheck,
-        null_ls.builtins.code_actions.shellcheck,
+        -- null_ls.builtins.formatting.shellharden,
+        -- null_ls.builtins.diagnostics.shellcheck,
+        -- null_ls.builtins.code_actions.shellcheck,
 
         -- general
-        null_ls.builtins.formatting.prettierd
+        -- null_ls.builtins.formatting.prettierd
     },
+    on_attach = mappings.functions.lsp,
 })
 
 -- nvim-cmp supports additional completion capabilities, so broadcast that to servers
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 
--- Ensure the servers above are installed
-local mason_lspconfig = require 'mason-lspconfig'
-
 -- mason installs
-local servers = {
-    prettierd = {},
-    shellcheck = {},
-    shellharden = {},
-    cpptools = {},
-    codelldb = {},
-    clangd = {},
-    rust_analyzer = {
-        ["rust-analyzer"] = {
-            checkOnSave = {
-                command = "clippy",
+-- mason-null-ls needs it as a string
+-- while mason-lspconfig wants it as a table
+local mason_installs = {
+    null_tools = {
+        "prettierd",
+        "shellcheck",
+        "shellharden",
+        "cpptools",
+        "codelldb",
+    },
+    servers = {
+        clangd = {},
+        rust_analyzer = {
+            ["rust-analyzer"] = {
+                checkOnSave = {
+                    command = "clippy",
+                },
             },
         },
-    },
-    lua_ls = {
-        Lua = {
-            workspace = { checkThirdParty = false },
-            telemetry = { enable = false },
+        lua_ls = {
+            Lua = {
+                workspace = { checkThirdParty = false },
+                telemetry = { enable = false },
+            },
         },
-    },
+    }
 }
 
+require("mason-null-ls").setup {
+    ensure_installed = mason_installs.null_tools,
+    handlers = {},
+    automatic_installation = false
+}
+
+local mason_lspconfig = require 'mason-lspconfig'
 mason_lspconfig.setup {
-    ensure_installed = vim.tbl_keys(servers),
+    ensure_installed = vim.tbl_keys(mason_installs.servers),
 }
 
 mason_lspconfig.setup_handlers {
@@ -111,8 +122,8 @@ mason_lspconfig.setup_handlers {
         require('lspconfig')[server_name].setup {
             capabilities = capabilities,
             on_attach = mappings.functions.lsp,
-            settings = servers[server_name],
-            filetypes = (servers[server_name] or {}).filetypes,
+            settings = mason_installs.servers[server_name],
+            filetypes = (mason_installs.servers[server_name] or {}).filetypes,
         }
     end
 }
