@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if [ ! $(pgrep "pipewire") ]; then
+if [ ! "$(pgrep "pipewire")" ]; then
 	pipewire &
 	pipewire-pulse &
 	wireplumber &
@@ -15,68 +15,77 @@ pkill "syncthing"
 pkill "udiskie"
 pkill -f "/usr/libexec/polkit-gnome-authentication-agent-1"
 
-wbg ~/Images/apocalypse.png &
+wbg "$HOME"/Images/apocalypse.png &
 mako &
 blueman-applet &
-mpd $HOME/.config/mpd/mpd.conf
+mpd "$HOME"/.config/mpd/mpd.conf
 /usr/bin/syncthing serve --no-browser --logfile=default &
 udiskie --automount --notify &
 /usr/libexec/polkit-gnome-authentication-agent-1 &
 
-~/.config/waybar/launch
+"$HOME"/.config/waybar/launch
 
 # set keyboard layout and gtk
 gnomeschema=org.gnome.desktop.interface
-gsettings set $gnomeschema
-gsettings set $gnomeschema cursor-theme Breeze_Obsidian
-gsettings set $gnomeschema color-scheme 'prefer-dark' color-scheme 'prefer-dark'
-gsettings set $gnomeschema gtk-theme 'Catppuccin-mauve'
-gsettings set $gnomeschema font-name 'UbuntuMono 11'
+gsettings set "$gnomeschema"
+gsettings set "$gnomeschema" cursor-theme Breeze_Obsidian
+gsettings set "$gnomeschema" color-scheme "prefer-dark" color-scheme "prefer-dark"
+gsettings set "$gnomeschema" gtk-theme "Catppuccin-mauve"
+gsettings set "$gnomeschema" font-name "UbuntuMono 11"
 riverctl xcursor-theme Breeze_Obsidian 30
 
 # change to whatever from riverctl list-inputs
-device="pointer-2-7-SynPS/2_Synaptics_TouchPad"
+trackpad="pointer-2-7-SynPS/2_Synaptics_TouchPad"
 riverctl keyboard-layout gb
-riverctl input $device tap enabled
-riverctl input $device pointer-accel -0.1
-riverctl input $device natural-scroll disabled
-riverctl input $device disable-while-typing enabled
+riverctl input "$trackpad" tap enabled
+riverctl input "$trackpad" pointer-accel -0.1
+riverctl input "$trackpad" natural-scroll disabled
+riverctl input "$trackpad" disable-while-typing enabled
+riverctl input "$trackpad" events disabled-on-external-mouse
+
+mouse="pointer-1118-64-Microsoft_Microsoft_3-Button_Mouse_with_IntelliEye(TM)"
+riverctl keyboard-layout gb
+riverctl input "$mouse" tap enabled
+riverctl input "$mouse" pointer-accel -0.3
+riverctl input "$mouse" natural-scroll disabled
+riverctl input "$mouse" disable-while-typing disabled
+riverctl input "$mouse" accel-profile flat
 
 
 # keybinds #################################################################
 riverctl map normal Super+Shift Q exit
-riverctl map normal Super+Shift W spawn '~/.config/river/init'
+riverctl map normal Super+Shift W spawn "$HOME/.config/river/init"
 
 riverctl map normal Super W close
-riverctl map normal Super+Shift Delete spawn '~/.config/scripts/powermenu.sh'
+riverctl map normal Super+Shift Delete spawn "$HOME/.config/scripts/powermenu.sh"
 
-riverctl map normal None XF86AudioMute spawn 'pactl set-sink-mute @DEFAULT_SINK@ toggle'
-riverctl map normal None XF86AudioLowerVolume spawn 'wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-'
-riverctl map normal None XF86AudioRaiseVolume spawn 'wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%+'
+riverctl map normal None XF86AudioMute spawn "pactl set-sink-mute @DEFAULT_SINK@ toggle"
+riverctl map normal None XF86AudioLowerVolume spawn "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"
+riverctl map normal None XF86AudioRaiseVolume spawn "wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%+"
 
-riverctl map normal None XF86AudioPlay spawn '~/.config/scripts/player-controls.sh --toggle'
-riverctl map normal None XF86AudioPause spawn '~/.config/scripts/player-controls.sh --toggle'
-riverctl map normal None XF86AudioPrev spawn '~/.config/scripts/player-controls.sh --prev'
-riverctl map normal None XF86AudioNext spawn '~/.config/scripts/player-controls.sh --next'
+riverctl map normal None XF86AudioPlay spawn "$HOME/.config/scripts/player-controls.sh --toggle"
+riverctl map normal None XF86AudioPause spawn "$HOME/.config/scripts/player-controls.sh --toggle"
+riverctl map normal None XF86AudioPrev spawn "$HOME/.config/scripts/player-controls.sh --prev"
+riverctl map normal None XF86AudioNext spawn "$HOME/.config/scripts/player-controls.sh --next"
 
-riverctl map normal Super F2 spawn 'brightnessctl s 5%-'
-riverctl map normal Super F3 spawn 'brightnessctl s 5%+'
+riverctl map normal Super F2 spawn "brightnessctl s 5%-"
+riverctl map normal Super F3 spawn "brightnessctl s 5%+"
 
-riverctl map normal Super P spawn 'rofi -show drun'
-riverctl map normal Super R spawn 'rofi -show run'
-riverctl map normal Super Return spawn 'alacritty'
-riverctl map normal None Print spawn 'grim $HOME/Images/Screenshots/$(date +%Y-%m-%dT%H-%M-%S%z).jpg ; notify-send -a grim Screenshot "Saved as $(date +%Y-%m-%dT%H-%M-%S%z).jpg"
-'
-riverctl map normal Super Print spawn '~/.config/scripts/rofi-grim.sh'
-riverctl map normal Super+Shift Print spawn '~/.config/scripts/rofi-wf-recorder.sh'
-riverctl map normal Super U spawn '~/.config/scripts/script-manager.sh'
-riverctl map normal Super E spawn '~/.config/scripts/file-editor.sh'
-riverctl map normal Super V spawn '~/.config/scripts/wireguard.sh'
-riverctl map normal Super I spawn '~/.config/scripts/images.sh'
+riverctl map normal Super P spawn "rofi -show drun"
+riverctl map normal Super R spawn "rofi -show run"
+riverctl map normal Super Return spawn "alacritty"
+riverctl map normal None Print spawn "grim $HOME/Images/Screenshots/$(date +%Y-%m-%dT%H-%M-%S%z).jpg ; notify-send -a grim Screenshot "Saved as "$(date +%Y-%m-%dT%H-%M-%S%z).jpg
+"
+riverctl map normal Super Print spawn "$HOME/.config/scripts/rofi-grim.sh"
+riverctl map normal Super+Shift Print spawn "$HOME/.config/scripts/rofi-wf-recorder.sh"
+riverctl map normal Super U spawn "$HOME/.config/scripts/script-manager.sh"
+riverctl map normal Super E spawn "$HOME/.config/scripts/file-editor.sh"
+riverctl map normal Super V spawn "$HOME/.config/scripts/wireguard.sh"
+riverctl map normal Super I spawn "$HOME/.config/scripts/images.sh"
 
 # workspaces/tags
 tagnum=9
-for i in $(seq 1 $tagnum)
+for i in "$(seq 1 "$tagnum")"
 do
     tags=$((1 << ($i - 1)))
 
@@ -111,7 +120,7 @@ riverctl map normal Super S toggle-focused-tags $scratch_tag
 # Send windows to the scratchpad with Super+Shift+P
 riverctl map normal Super+Shift S set-view-tags $scratch_tag
 
-# Set spawn tagmask to ensure new windows don't have the scratchpad tag unless
+# Set spawn tagmask to ensure new windows don"t have the scratchpad tag unless
 # explicitly set.
 all_but_scratch_tag=$(( ((1 << $tagnum) - 1) ^ $scratch_tag ))
 riverctl spawn-tagmask $all_but_scratch_tag
@@ -175,8 +184,8 @@ riverctl border-color-focused 0xcba6f7
 riverctl border-color-unfocused 0xffffff00
 
 # floating windows
-riverctl float-filter-add app-id 'imv'
-riverctl float-filter-add app-id 'mpv'
+riverctl float-filter-add app-id "imv"
+riverctl float-filter-add app-id "mpv"
 
 # Set keyboard repeat rate
 riverctl set-repeat 50 300
