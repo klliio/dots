@@ -62,13 +62,13 @@ mappings.gitsigns = {
 }
 
 mappings.debugging = {
-    [{{"n"}, "<F7>"}] = { require("dapui").toggle, { desc = "Debug" } },
-    [{{"n"}, "<F5>"}] = { require("dap").continue, { desc = "Debug" } },
-    [{{"n"}, "<F1>"}] = { require("dap").step_into, { desc = "Debug" } },
-    [{{"n"}, "<F2>"}] = { require("dap").step_over, { desc = "Debug" } },
-    [{{"n"}, "<F3>"}] = { require("dap").step_out, { desc = "Debug" } },
-    [{{"n"}, "<leader>b"}] = { require("dap").toggle_breakpoint, { desc = "Debug" } },
-    [{{"n"}, "<leader>B"}] = { function() require("dap").set_breakpoint(vim.fn.input "Breakpoint condition: ") end, { desc = "Debug: Set Breakpoint" } },
+    [{{"n"}, "<F7>"}] = { require("dapui").toggle, { desc = "Toggle DapUi" } },
+    [{{"n"}, "<F5>"}] = { require("dap").continue, { desc = "Continue Dap" } },
+    [{{"n"}, "<F1>"}] = { require("dap").step_into, { desc = "Step Into" } },
+    [{{"n"}, "<F2>"}] = { require("dap").step_over, { desc = "Step Over" } },
+    [{{"n"}, "<F3>"}] = { require("dap").step_out, { desc = "Step Out" } },
+    [{{"n"}, "<leader>b"}] = { require("dap").toggle_breakpoint, { desc = "Toggle Breakpoint" } },
+    [{{"n"}, "<leader>B"}] = { function() require("dap").set_breakpoint(vim.fn.input "Breakpoint condition: ") end, { desc = "Set Breakpoint Condition" } },
 }
 
 mappings.telescope = {
@@ -114,6 +114,11 @@ mappings.lsp = {
         print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
     end, { desc = "Workspace List Folders" } },
 }
+
+-- prefix debugging descriptions with "DEBUG: "
+for _, debugging_opts in pairs(mappings.debugging) do
+    debugging_opts[2].desc = "DEBUG: " .. debugging_opts[2].desc
+end
 
 -- prefix lsp descriptions with "LSP: "
 for _, lsp_opts in pairs(mappings.lsp) do
