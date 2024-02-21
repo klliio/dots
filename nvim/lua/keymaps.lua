@@ -105,7 +105,7 @@ mappings.lsp = {
 
     -- Documentation
     [{{"n"}, "K"}] = { vim.lsp.buf.hover, { desc = "Hover Documentation" } },
-    [{{"n"}, "<C-k>"}] = { vim.lsp.buf.signature_help, { desc = "Signature Documentation" } },
+    [{{"n"}, "<M-k>"}] = { vim.lsp.buf.signature_help, { desc = "Signature Documentation" } },
 
     -- Workspaces
     [{{"n"}, "<leader>wa"}] = { vim.lsp.buf.add_workspace_folder, { desc = "Workspace Add Folder" } },
