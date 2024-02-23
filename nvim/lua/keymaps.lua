@@ -63,6 +63,7 @@ mappings.gitsigns = {
 
 mappings.debugging = {
     [{{"n"}, "<F7>"}] = { require("dapui").toggle, { desc = "Toggle DapUi" } },
+    [{{"n"}, "<F6>"}] = { require("dap").terminate, { desc = "Terminate Dap" } },
     [{{"n"}, "<F5>"}] = { require("dap").continue, { desc = "Continue Dap" } },
     [{{"n"}, "<F1>"}] = { require("dap").step_into, { desc = "Step Into" } },
     [{{"n"}, "<F2>"}] = { require("dap").step_over, { desc = "Step Over" } },
