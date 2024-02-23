@@ -14,6 +14,8 @@ udiskie --automount &
 xinput set-prop 'pointer-2-7-SynPS/2_Synaptics_TouchPad' 'libinput Accel Speed' -0.1
 xinput set-prop 'Microsoft Microsoft 3-Button Mouse with IntelliEye(TM)' 'libinput Accel Speed' -0.3
 
+setxkbmap gb
+
 bspc config border_width 			0
 bspc config window_gap 				0
 
