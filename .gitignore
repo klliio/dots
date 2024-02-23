@@ -26,3 +26,13 @@
 !newsboat/
 !newsboat/config
 !newsboat/dark
+
+# backups
+!bspwm/
+!bspwm/**
+!sxhkd/
+!sxhkd/**
+!picom/
+!picom/**
+!polybar/
+!polybar/**

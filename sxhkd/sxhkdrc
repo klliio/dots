@@ -1,0 +1,59 @@
+# reload sxhkd
+super + Escape
+	pkill -USR1 -x sxhkd
+
+# quit or restart bspwm
+super + shift + {q,r}
+	bspc {quit,wm -r}
+
+# media playback
+{XF86AudioPlay,XF86AudioPause,XF86AudioNext,XF86AudioPrev}
+	{$HOME/.config/scripts/player-controls.sh --toggle, $HOME/.config/scripts/player-controls.sh --toggle, HOME/.config/scripts/player-controls.sh --next, HOME/.config/scripts/player-controls.sh --prev}
+
+# volume
+{XF86AudioMute,XF86AudioLowerVolume,XF86AudioRaiseVolume}
+	{pactl set-sink-mute @DEFAULT_SINK@ toggle, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-, wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%+}
+
+# brightness
+super + {XF86MonBrightnessDown,XF86MonBrightnessUp}
+	brightnessctl s 12000{-,+}
+
+# open terminal or make current window biggest
+super + {_,shift + }Return
+	{alacritty, bspc node -s biggest.local}
+
+# powermenu
+super + shift + Delete
+	~/.config/scripts/powermenu.sh
+
+# rofi apps
+super + p
+	rofi -show drun
+
+# rofi run
+super + r
+	rofi -show run
+
+# close or kill window
+super + {_,shift + }w
+	bspc node -{c,k}
+
+# rotate desktop or selection
+super + {_, shift + } {Left,Right}
+	bspc node {_,@/} -R {-,+}90
+
+# select parent
+super + s
+	bspc node -f @parent
+
+# change window state
+super + {t,ctrl + t,f}
+	bspc node -t {tiled,psuedo_tiled,fullscreen}
+
+# change window size
+super + {h,j,k,l}
+	bspc node -z {left -20 0,bottom 0 20,top 0 -20,right 20 0}
+
+# focus or send window to different desktop
+super + {_,shift + }{1-9,0}
+	bspc {desktop -f,node -d} '^{1-9,10}'
