@@ -1,0 +1,10 @@
+#!/bin/sh
+
+Selection=true
+Lang=en_GB.UTF-8
+
+# Source .profile and .bashrc
+. /etc/profile
+. "$HOME"/.bashrc
+
+exec dbus-run-session "$@"
