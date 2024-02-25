@@ -12,7 +12,7 @@ udiskie --automount &
 
 # set touchpad/mouse settings
 xinput set-prop 'pointer-2-7-SynPS/2_Synaptics_TouchPad' 'libinput Accel Speed' -0.1
-xinput set-prop 'Microsoft Microsoft 3-Button Mouse with IntelliEye(TM)' 'libinput Accel Speed' -0.3
+xinput set-prop 'Microsoft Microsoft 3-Button Mouse with IntelliEye(TM)' 'libinput Accel Speed' -1
 
 setxkbmap gb
 
