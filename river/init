@@ -4,7 +4,14 @@ if [ ! "$(pgrep "pipewire")" ]; then
 	pipewire &
 	pipewire-pulse &
 	wireplumber &
+fi
 
+if [ ! "$(pgrep "gomuks")" ]; then
+    alacritty -e gomuks &
+fi
+
+if [ ! "$(pgrep "weechat")" ]; then
+    alacritty -e weechat &
 fi
 
 pkill "wbg"
@@ -13,7 +20,7 @@ pkill "blueman-applet"
 pkill "mpd"
 pkill "syncthing"
 pkill "udiskie"
-pkill -f "/usr/libexec/polkit-gnome-authentication-agent-1"
+pkill "waybar"
 
 wbg "$HOME"/Images/apocalypse.png &
 mako &
@@ -21,9 +28,7 @@ blueman-applet &
 mpd "$HOME"/.config/mpd/mpd.conf
 /usr/bin/syncthing serve --no-browser --logfile=default &
 udiskie --automount --notify &
-/usr/libexec/polkit-gnome-authentication-agent-1 &
-
-"$HOME"/.config/waybar/launch
+waybar &
 
 # set keyboard layout and gtk
 gnomeschema=org.gnome.desktop.interface
