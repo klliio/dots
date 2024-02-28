@@ -175,8 +175,8 @@ rivertile -view-padding 6 -outer-padding 6 -main-location left -main-ratio 0.65 
 # startup
 if [ ! "$(pgrep "pipewire")" ]; then
 	pipewire &
+    wireplumber &
 	pipewire-pulse &
-	wireplumber &
 fi
 
 if [ ! "$(pgrep "gomuks")" ]; then
@@ -198,7 +198,7 @@ pkill "waybar"
 wbg "$HOME"/Images/apocalypse.png &
 mako &
 blueman-applet &
-mpd "$HOME"/.config/mpd/mpd.conf
+mpd "$HOME"/.config/mpd/mpd.conf &
 /usr/bin/syncthing serve --no-browser --logfile=default &
 udiskie --automount --notify &
 waybar &

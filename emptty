@@ -5,6 +5,6 @@ Lang=en_GB.UTF-8
 
 # Source .profile and .bashrc
 . /etc/profile
-. "$HOME"/.bashrc
+. $HOME/.bashrc
 
-exec "$@"
+exec dbus-run-session $@
