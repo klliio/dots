@@ -1,35 +1,5 @@
 #!/bin/bash
 
-if [ ! "$(pgrep "pipewire")" ]; then
-	pipewire &
-	pipewire-pulse &
-	wireplumber &
-fi
-
-if [ ! "$(pgrep "gomuks")" ]; then
-    alacritty -e gomuks &
-fi
-
-if [ ! "$(pgrep "weechat")" ]; then
-    alacritty -e weechat &
-fi
-
-pkill "wbg"
-pkill "mako"
-pkill "blueman-applet"
-pkill "mpd"
-pkill "syncthing"
-pkill "udiskie"
-pkill "waybar"
-
-wbg "$HOME"/Images/apocalypse.png &
-mako &
-blueman-applet &
-mpd "$HOME"/.config/mpd/mpd.conf
-/usr/bin/syncthing serve --no-browser --logfile=default &
-udiskie --automount --notify &
-waybar &
-
 # set keyboard layout and gtk
 gnomeschema=org.gnome.desktop.interface
 gsettings set "$gnomeschema"
@@ -188,6 +158,8 @@ riverctl background-color 0x002b36
 riverctl border-color-focused 0xcba6f7
 riverctl border-color-unfocused 0xffffff00
 
+# spawn tags
+
 # floating windows
 riverctl float-filter-add app-id "imv"
 riverctl float-filter-add app-id "mpv"
@@ -199,3 +171,34 @@ riverctl set-repeat 50 300
 # River will send the process group of the init executable SIGTERM on exit.
 riverctl default-layout rivertile
 rivertile -view-padding 6 -outer-padding 6 -main-location left -main-ratio 0.65 &
+
+# startup
+if [ ! "$(pgrep "pipewire")" ]; then
+	pipewire &
+	pipewire-pulse &
+	wireplumber &
+fi
+
+if [ ! "$(pgrep "gomuks")" ]; then
+    alacritty -e gomuks &
+fi
+
+if [ ! "$(pgrep "weechat")" ]; then
+    alacritty -e weechat &
+fi
+
+pkill "wbg"
+pkill "mako"
+pkill "blueman-applet"
+pkill "mpd"
+pkill "syncthing"
+pkill "udiskie"
+pkill "waybar"
+
+wbg "$HOME"/Images/apocalypse.png &
+mako &
+blueman-applet &
+mpd "$HOME"/.config/mpd/mpd.conf
+/usr/bin/syncthing serve --no-browser --logfile=default &
+udiskie --automount --notify &
+waybar &

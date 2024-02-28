@@ -11,19 +11,19 @@ shape = "Underline"
 size = 14
 
 [font.bold]
-family = "Hack Nerd Font Mono"
+family = "monospace"
 style = "Bold"
 
 [font.bold_italic]
-family = "Hack Nerd Font Mono"
+family = "monospace"
 style = "Bold Italic"
 
 [font.italic]
-family = "Hack Nerd Font Mono"
+family = "monospace"
 style = "Italic"
 
 [font.normal]
-family = "Hack Nerd Font Mono"
+family = "monospace"
 style = "Regular"
 
 [scrolling]

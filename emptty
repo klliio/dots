@@ -7,4 +7,4 @@ Lang=en_GB.UTF-8
 . /etc/profile
 . "$HOME"/.bashrc
 
-exec dbus-run-session "$@"
+exec "$@"
