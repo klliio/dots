@@ -8,7 +8,7 @@ super + shift + {q,r}
 
 # media playback
 {XF86AudioPlay,XF86AudioPause,XF86AudioNext,XF86AudioPrev}
-	{$HOME/.config/scripts/player-controls.sh --toggle, $HOME/.config/scripts/player-controls.sh --toggle, HOME/.config/scripts/player-controls.sh --next, HOME/.config/scripts/player-controls.sh --prev}
+	{$HOME/.config/scripts/player-controls.sh --toggle, $HOME/.config/scripts/player-controls.sh --toggle, $HOME/.config/scripts/player-controls.sh --next, $HOME/.config/scripts/player-controls.sh --prev}
 
 # volume
 {XF86AudioMute,XF86AudioLowerVolume,XF86AudioRaiseVolume}
