@@ -57,7 +57,7 @@ riverctl map normal Super I spawn "$HOME/.config/scripts/images.sh"
 
 # workspaces/tags
 tagnum=9
-for i in $(seq 1 "$tagnum")
+for i in "$(seq 1 "$tagnum")"
 do
     tags=$((1 << ($i - 1)))
 
@@ -182,6 +182,10 @@ fi
 
 if [ ! "$(pgrep "weechat")" ]; then
     alacritty -e weechat &
+fi
+
+if [ ! "$(pgrep "polkit-gnome")" ]; then
+    /usr/libexec/polkit-gnome-authentication-agent-1 &
 fi
 
 pkill "wbg"
