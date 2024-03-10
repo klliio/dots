@@ -34,6 +34,7 @@ riverctl map normal Super+Shift W spawn "$HOME/.config/river/init"
 riverctl map normal Super W close
 riverctl map normal Super+Shift Delete spawn "$HOME/.config/scripts/powermenu.sh"
 
+# needs "Handle" options to be set to ignore in /etc/elogind/logind.conf
 riverctl map normal None XF86AudioMute spawn "pactl set-sink-mute @DEFAULT_SINK@ toggle"
 riverctl map normal None XF86AudioLowerVolume spawn "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"
 riverctl map normal None XF86AudioRaiseVolume spawn "wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%+"
@@ -50,7 +51,7 @@ riverctl map normal Super P spawn "rofi -show drun"
 riverctl map normal Super R spawn "rofi -show run"
 riverctl map normal Super Return spawn "alacritty"
 
-riverctl map normal None Print spawn "grim $HOME/Images/Screenshots/$(date +%Y-%m-%dT%H-%M-%S%z).jpg && notify-send -a grim Screenshot "Saved as "$(date +%Y-%m-%dT%H-%M-%S%z).jpg"
+riverctl map normal None Print spawn "grim $HOME/Images/Screenshots/$(date +%Y-%m-%dT%H-%M-%S%z).jpg && notify-send -a grim Screenshot 'Saved as $(date +%Y-%m-%dT%H-%M-%S%z).jpg'"
 riverctl map normal Super Print spawn "$HOME/.config/scripts/rofi-grim.sh"
 riverctl map normal Super+Shift Print spawn "$HOME/.config/scripts/rofi-wf-recorder.sh"
 riverctl map normal Super I spawn "$HOME/.config/scripts/images.sh"
