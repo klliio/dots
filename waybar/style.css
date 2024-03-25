@@ -1,57 +1,61 @@
-@define-color base       #1e1e2e ;
-@define-color text       #cdd6f4 ;
-@define-color subtext    #a6adc8 ;
-@define-color purple     #cba6f7 ;
-@define-color yellow     #f9e2af ;
-@define-color red        #f38ba8 ;
-@define-color blue       #74c7ec ;
+@define-color base       #1e1e2e;
+@define-color text       #cdd6f4;
+@define-color subtext    #a6adc8;
+@define-color purple     #cba6f7;
+@define-color yellow     #f9e2af;
+@define-color red        #f38ba8;
+@define-color blue       #74c7ec;
 
 * {
-	font-family: monospace;
-	font-weight: 600;
-	font-size: 18px;
-	/* background-color: red; */
-	background: transparent;
-	color: @text;
-	padding: 0;
-	margin: 0;
+    font-family: monospace;
+    font-weight: 600;
+    font-size: 18px;
+    /* background-color: red; */
+    background: transparent;
+    color: @text;
+    padding: 0;
+    margin: 0;
 }
 
 #waybar {
-	background: @base;
-	border-radius: 5px
+    background: @base;
+    border-radius: 5px;
 }
 
 button:hover {
-	box-shadow: none;
-	text-shadow: none;
-	background: none;
+    box-shadow: none;
+    text-shadow: none;
+    background: none;
 }
 
 tooltip {
-	border: 1px solid #abbcda;
-	background: alpha(@base,0.9);
+    border: 1px solid #abbcda;
+    background: alpha(@base, 0.9);
 }
 
 #custom-separator {
-	color: @subtext;
-	margin: 0 5px;
+    color: @subtext;
+    margin: 0 5px;
 }
 
 #tags button.occupied label {
-	background: alpha(@purple, 0.9);
-	opacity: 0.6;
-	color: @base
+    background: alpha(@purple, 0.9);
+    opacity: 0.6;
+    color: @base;
 }
 
 #tags button:hover label,
 #tags button.focused label,
 #tags button.urgent label {
-	background: @purple;
-	opacity: 0.8;
-	color: @base
+    background: @purple;
+    opacity: 0.8;
+    color: @base;
+}
+
+#tags button.urgent label {
+    background: @red;
 }
 
 #misc * {
-	padding: 0 2px;
+    padding: 0 2px;
 }
