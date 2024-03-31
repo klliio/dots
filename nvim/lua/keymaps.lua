@@ -13,6 +13,7 @@ mappings.nav = {
     [{{"n"}, "<C-j>"}] = { ":wincmd j<CR>", { silent = false, remap = false, desc = "Move down a split" } },
     [{{"n"}, "<C-h>"}] = { ":wincmd h<CR>", { silent = false, remap = false, desc = "Move left a split" } },
     [{{"n"}, "<C-l>"}] = { ":wincmd l<CR>", { silent = false, remap = false, desc = "Move right a split" } },
+    [{{"n"}, "<C-w>h"}] = { ":sp", {silent=true, remap=false, desc = "Split Window Horizontally"}},
     [{{"n"}, "q:"}] = { "<Nop>" },
     [{{"n"}, "<leader>cc"}] = { function()
         if vim.wo.cc == "101" then
@@ -29,8 +30,7 @@ mappings.custom = {
 }
 
 mappings.cybu = {
-    [{{"n"}, "<s-tab>"}] = { "<Plug>(CybuPrev)", { desc = "Move to the Previous Buffer" } },
-    [{{"n"}, "<tab>"}] = { "<Plug>(CybuNext)", { desc = "Move to the Next Buffer" } },
+    [{{"n"}, "<s-tab>"}] = { "<Plug>(CybuPrev)", { desc = "Move to the Previous Buffer" } }, [{{"n"}, "<tab>"}] = { "<Plug>(CybuNext)", { desc = "Move to the Next Buffer" } },
     [{{"n"}, "[b"}] = { "<plug>(CybuLastusedPrev)", { desc = "Move to the Previous Buffer" } },
     [{{"n"}, "]b"}] = { "<plug>(CybuLastusedNext)", { desc = "Move to the Next Buffer" } },
 }
