@@ -13,7 +13,7 @@ mappings.nav = {
     [{ { "n" }, "<C-j>" }] = { ":wincmd j<CR>", { silent = false, remap = false, desc = "Move down a split" } },
     [{ { "n" }, "<C-h>" }] = { ":wincmd h<CR>", { silent = false, remap = false, desc = "Move left a split" } },
     [{ { "n" }, "<C-l>" }] = { ":wincmd l<CR>", { silent = false, remap = false, desc = "Move right a split" } },
-    [{ { "n" }, "<C-w>h" }] = { ":sp", { silent = true, remap = false, desc = "Split Window Horizontally" } },
+    [{ { "n" }, "<C-w>h" }] = { ":sp <CR>", { silent = true, remap = false, desc = "Split Window Horizontally" } },
     [{ { "n" }, "q:" }] = { "<Nop>" },
     [{ { "n" }, "<leader>cc" }] = { function()
         if vim.wo.cc == "101" then
