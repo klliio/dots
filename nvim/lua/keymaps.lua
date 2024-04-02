@@ -2,7 +2,6 @@ local mappings = {}
 
 -- [{{modes}, keymap}] = {"command", {options}}
 mappings.nav = {
-    [{ { "n" }, "<space>" }] = { "<Nop>" },
     [{ { "n", "v" }, "k" }] = { "v:count == 0 ? 'gk' : 'k'", { expr = true } },
     [{ { "n", "v" }, "j" }] = { "v:count == 0 ? 'gj' : 'j'", { expr = true } },
     [{ { "n" }, "<C-Up>" }] = { ":resize -1<CR>", { silent = true, remap = false, desc = "Shrink the Window Horizontally" } },
@@ -14,7 +13,13 @@ mappings.nav = {
     [{ { "n" }, "<C-h>" }] = { ":wincmd h<CR>", { silent = false, remap = false, desc = "Move left a split" } },
     [{ { "n" }, "<C-l>" }] = { ":wincmd l<CR>", { silent = false, remap = false, desc = "Move right a split" } },
     [{ { "n" }, "<C-w>h" }] = { ":sp <CR>", { silent = true, remap = false, desc = "Split Window Horizontally" } },
+}
+
+mappings.custom = {
+    [{ { "n" }, "<leader>yy" }] = { ":%y+<CR><CR>", { silent = true, remap = false, desc = "Yank the Entire Buffer" } },
+    [{ { "n" }, "<S-o>" }] = { "^i<CR><Esc>k^i", { silent = true, remap = false, desc = "Insert Line Above" } },
     [{ { "n" }, "q:" }] = { "<Nop>" },
+    [{ { "n" }, "<space>" }] = { "<Nop>" },
     [{ { "n" }, "<leader>cc" }] = { function()
         if vim.wo.cc == "101" then
             vim.opt.colorcolumn = "0"
@@ -22,11 +27,6 @@ mappings.nav = {
             vim.opt.colorcolumn = "101"
         end
     end, { desc = "Toggle Colorcolumn" } },
-}
-
-mappings.custom = {
-    [{ { "n" }, "<leader>yy" }] = { ":%y+<CR><CR>", { silent = true, remap = false, desc = "Yank the Entire Buffer" } },
-    [{ { "n" }, "<S-o>" }] = { "^i<CR><Esc>k^i", { silent = true, remap = false, desc = "Insert Line Above" } },
 }
 
 mappings.cybu = {
