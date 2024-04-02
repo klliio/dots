@@ -29,7 +29,7 @@ riverctl input "$mouse" accel-profile flat
 
 # keybinds #################################################################
 riverctl map normal Super+Shift Q exit
-riverctl map normal Super+Shift W spawn "$HOME/.config/river/init"
+riverctl map normal Super Q spawn "$HOME/.config/river/init"
 
 riverctl map normal Super W close
 riverctl map normal Super+Shift Delete spawn "$HOME/.config/scripts/powermenu.sh"
@@ -197,7 +197,7 @@ pkill "syncthing"
 pkill "udiskie"
 pkill "waybar"
 
-wbg "$HOME"/Images/WallPapers/Apocalypse.png &
+wbg "$HOME"/Images/Wallpapers/Apocalypse.png &
 mako &
 blueman-applet &
 mpd "$HOME"/.config/mpd/mpd.conf &
