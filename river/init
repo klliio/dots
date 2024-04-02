@@ -177,14 +177,6 @@ if [ ! "$(pgrep "pipewire")" ]; then
 	pipewire-pulse &
 fi
 
-if [ ! "$(pgrep "gomuks")" ]; then
-    alacritty -e gomuks &
-fi
-
-if [ ! "$(pgrep "weechat")" ]; then
-    alacritty -e weechat &
-fi
-
 if [ ! "$(pgrep "polkit-gnome")" ]; then
     /usr/libexec/polkit-gnome-authentication-agent-1 &
 fi
