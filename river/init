@@ -197,7 +197,7 @@ pkill "syncthing"
 pkill "udiskie"
 pkill "waybar"
 
-wbg "$HOME"/Images/apocalypse.png &
+wbg "$HOME"/Images/WallPapers/Apocalypse.png &
 mako &
 blueman-applet &
 mpd "$HOME"/.config/mpd/mpd.conf &
