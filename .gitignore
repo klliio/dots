@@ -27,6 +27,8 @@
 !newsboat/config
 !newsboat/dark
 !emptty
+!eww/
+!eww/**
 
 # backups
 !bspwm/
