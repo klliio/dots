@@ -1,0 +1,56 @@
+@import "./var/catppuccin.scss";
+@import "./var/font.scss";
+@import "./var/bar.scss";
+
+* {
+    all: unset;
+    font-size: $font-size-main;
+    font-family: monospace;
+    font-weight: 600;
+}
+
+// main bar
+.bar .left,
+.bar .center,
+.bar .right {
+    padding: $bar-padding;
+    border-radius: $bar-radius;
+    background-color: $base;
+}
+
+.sep {
+    color: $overlay1;
+}
+
+// battery indicator
+.battery {
+    // keeps it aligned to side
+    margin: 0px -7px; // half of .circle margin
+}
+
+.battery .circle {
+    color: $mauve;
+    margin: 14px;
+}
+
+.battery .inner {
+    border-radius: 100%;
+    margin: 10px;
+    background-color: $base;
+    color: $mauve;
+}
+
+// volume slider
+.brightness_bar trough highlight,
+.volume_bar trough highlight {
+    background-image: linear-gradient(to right, $bar1 35%, $bar2 70%, $bar3 100% *50);
+    border-radius: 10px;
+}
+
+scale trough {
+    all: unset;
+    background-color: $base;
+    box-shadow: 1px 0px 2px 2px $crust; border-radius: 16px; min-height: 10px; min-width: 70px;
+    margin: 0px 10px 0px 0px;
+}
+
