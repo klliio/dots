@@ -1,11 +1,18 @@
 // compile, reset, apply
-Utils.exec('sassc style/main.scss /tmp/ags.css')
+Utils.exec(`sassc ${App.configDir}/style/main.scss /tmp/ags.css`)
 
 // custom icons
 App.addIcons(`${App.configDir}/assets`)
 
-import * as widgets from './lib/widgets.js'
-import * as values from './lib/variables.js'
+import { Sep } from './lib/sep.js'
+import { Battery_Bar, Battery_Circle } from './lib/battery.js'
+import { Clock } from './lib/date.js'
+import {
+    VolumeSlider,
+    BacklightSlider,
+    volume_reveal,
+    brightness_reveal,
+} from './lib/sliders.js'
 
 // layout of the bar
 function Left() {
@@ -13,7 +20,7 @@ function Left() {
         class_name: 'left',
         hpack: 'start',
         spacing: 8,
-        children: [widgets.Battery(values.battery)],
+        children: [Battery_Circle(), Battery_Bar()],
     })
 }
 
@@ -31,15 +38,7 @@ function Right() {
         class_name: 'right',
         hpack: 'end',
         spacing: 8,
-        children: [
-            widgets.default(
-                values.volume_reveal,
-                values.volume_icon,
-                `wpctl set-mute @DEFAULT_SINK@ toggle`
-            ),
-            widgets.Sep(),
-            widgets.Clock(values.date),
-        ],
+        children: [BacklightSlider(), VolumeSlider(), Sep(), Clock()],
     })
 }
 
@@ -49,7 +48,7 @@ function Bar(monitor) {
         class_name: 'bar',
         monitor,
         layer: 'bottom',
-        margins: [6, 6, 0, 6], // top right bottom left
+        margins: [6, 6, 0, 6], // [top, right, bottom, left]
         anchor: ['top', 'left', 'right'],
         exclusivity: 'exclusive',
         child: Widget.CenterBox({
@@ -57,6 +56,19 @@ function Bar(monitor) {
             center_widget: Center(),
             end_widget: Right(),
         }),
+
+        /*                                            *\
+            makes things that rely on on_hover_lost
+            behave when exiting the window
+
+            this is to make it so that padding around 
+            the window is not needed
+        \*                                            */
+        setup: (self) =>
+            self.on('leave-notify-event', () => {
+                volume_reveal.value = false
+                brightness_reveal.value = false
+            }),
     })
 }
 

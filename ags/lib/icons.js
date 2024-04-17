@@ -2,7 +2,10 @@ export default {
     battery: 'battery-inner-circle-symbolic',
     volume: {
         muted: 'volume-mute-symbolic',
-        unmuted: 'volume-unmute-symbolic',
+        low: 'volume-low-symbolic',
+        medium: 'volume-medium-symbolic',
+        high: 'volume-high-symbolic',
+        overamplified: 'volume-overamplified-symbolic',
     },
     brightness: {
         high: 'brightness-high-symbolic',

@@ -2,7 +2,7 @@
 
 gnomeschema=org.gnome.desktop.interface
 gsettings set "$gnomeschema" cursor-theme Breeze_Obsidian
-gsettings set "$gnomeschema" gtk-theme "Catppuccin-mauve"
+gsettings set "$gnomeschema" gtk-theme "Catppuccin-Mocha-Standard-Mauve-Dark"
 gsettings set "$gnomeschema" font-name "UbuntuMono 11"
 
 export XCURSOR_PATH=${XCURSOR_PATH}:/usr/share/icons/
