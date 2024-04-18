@@ -39,10 +39,10 @@ riverctl map normal None XF86AudioMute spawn "pactl set-sink-mute @DEFAULT_SINK@
 riverctl map normal None XF86AudioLowerVolume spawn "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"
 riverctl map normal None XF86AudioRaiseVolume spawn "wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%+"
 
-riverctl map normal None XF86AudioPlay spawn "$HOME/.config/scripts/player-controls.sh --toggle"
-riverctl map normal None XF86AudioPause spawn "$HOME/.config/scripts/player-controls.sh --toggle"
-riverctl map normal None XF86AudioPrev spawn "$HOME/.config/scripts/player-controls.sh --prev"
-riverctl map normal None XF86AudioNext spawn "$HOME/.config/scripts/player-controls.sh --next"
+riverctl map normal None XF86AudioPlay spawn "playerctl play-pause"
+riverctl map normal None XF86AudioPause spawn "playerctl play-pause"
+riverctl map normal None XF86AudioPrev spawn "playerctl previous"
+riverctl map normal None XF86AudioNext spawn "playerctl next"
 
 riverctl map normal None XF86MonBrightnessDown spawn "brightnessctl s 5%-"
 riverctl map normal None XF86MonBrightnessUp spawn "brightnessctl s 5%+"
