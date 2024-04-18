@@ -13,10 +13,6 @@
 !scripts/**
 !scripts/*/target/*
 !scripts/*/target/**
-!ncmpcpp/
-!ncmpcpp/config
-!mpd/
-!mpd/mpd.conf
 !waybar/
 !waybar/**
 !river/
@@ -29,6 +25,8 @@
 !emptty
 !ags/
 !ags/**
+!cmus/
+!cmus/**
 
 # backups
 !bspwm/
