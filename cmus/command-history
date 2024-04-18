@@ -1,0 +1,11 @@
+save
+colorscheme catppuccin
+fsfd
+bind -f common i win-sel-cur
+bind -f common mouse_scroll_down win-down
+bind -f common h seek -5
+bind -f common g win-top
+bind -f common f toggle follow
+bind -f common enter win-activate
+shell 
+clear
