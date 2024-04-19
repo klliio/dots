@@ -12,15 +12,17 @@ function RevealingSlider(reveal, icon, click_command, slider) {
     return Widget.EventBox({
         class_name: 'revealing_slider',
         on_hover: () => (reveal.value = true),
-        on_hover_lost: () => (reveal.value = false),
+        on_hover_lost: () =>
+            Utils.timeout(250, () => {
+                reveal.value = false
+            }),
 
         child: Widget.Box({
             spacing: 3,
             vertical: false,
             children: [
                 Widget.Button({
-                    on_clicked: () =>
-                        Utils.execAsync(['sh', '-c', `${click_command}`]),
+                    on_clicked: () => Utils.execAsync(['sh', '-c', `${click_command}`]),
                     child: icon,
                 }),
                 Widget.Revealer({
