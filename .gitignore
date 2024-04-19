@@ -26,7 +26,7 @@
 !ags/
 !ags/**
 !cmus/
-!cmus/**
+!cmus/*.theme
 
 # backups
 !bspwm/
