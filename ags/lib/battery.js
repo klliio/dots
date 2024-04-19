@@ -1,5 +1,5 @@
-const battery = await Service.import('battery')
-const bar_reveal = Variable(false)
+const battery = await Service.import('battery');
+const bar_reveal = Variable(false);
 
 // circular battery indicator
 export function Battery_Circle() {
@@ -21,7 +21,7 @@ export function Battery_Circle() {
                 value: battery.bind('percent').as((p) => (p > 0 ? p / 100 : 0)),
             }),
         ],
-    })
+    });
 }
 
 // bar battery indicator
@@ -33,7 +33,7 @@ export function Battery_Bar() {
         // workaround to on_hover_lost needing the window to still be focused
         setup: (self) =>
             self.on('leave-notify-event', () => {
-                bar_reveal.value = false
+                bar_reveal.value = false;
             }),
 
         child: Widget.Box({
@@ -56,5 +56,5 @@ export function Battery_Bar() {
                 }),
             ],
         }),
-    })
+    });
 }

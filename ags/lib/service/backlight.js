@@ -16,8 +16,8 @@ class Backlight extends Service {
                 // 'r' means readable
                 // 'w' means writable
                 // guess what 'rw' means
-                'brightness': ['float', 'rw'],
-            },
+                brightness: ['float', 'rw'],
+            }
         );
     }
 
@@ -35,11 +35,9 @@ class Backlight extends Service {
 
     // the setter has to be in snake_case too
     set brightness(percent) {
-        if (percent < 0)
-            percent = 0;
+        if (percent < 0) percent = 0;
 
-        if (percent > 1)
-            percent = 1;
+        if (percent > 1) percent = 1;
 
         Utils.execAsync(`brightnessctl set ${percent * 100}% -q`);
         // the file monitor will handle the rest
@@ -78,7 +76,7 @@ class Backlight extends Service {
 }
 
 // the singleton instance
-const service = new Backlight;
+const service = new Backlight();
 
 // export to use in other modules
 export default service;

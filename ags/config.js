@@ -1,18 +1,14 @@
 // compile, reset, apply
-Utils.exec(`sassc ${App.configDir}/style/main.scss /tmp/ags.css`)
+Utils.exec(`sassc ${App.configDir}/style/main.scss /tmp/ags.css`);
 
 // custom icons
-App.addIcons(`${App.configDir}/assets`)
+App.addIcons(`${App.configDir}/assets`);
 
-import { Sep } from './lib/sep.js'
-import { Battery_Bar, Battery_Circle } from './lib/battery.js'
-import { Clock } from './lib/date.js'
-import {
-    VolumeSlider,
-    BacklightSlider,
-    volume_reveal,
-    brightness_reveal,
-} from './lib/sliders.js'
+import { Sep } from './lib/sep.js';
+import { Battery_Bar, Battery_Circle } from './lib/battery.js';
+import { Clock } from './lib/date.js';
+import { Player } from './lib/player.js';
+import { VolumeSlider, BacklightSlider, volume_reveal, brightness_reveal } from './lib/sliders.js';
 
 // layout of the bar
 function Left() {
@@ -21,7 +17,7 @@ function Left() {
         hpack: 'start',
         spacing: 8,
         children: [Battery_Circle(), Battery_Bar()],
-    })
+    });
 }
 
 function Center() {
@@ -29,8 +25,8 @@ function Center() {
         class_name: 'center',
         hpack: 'center',
         spacing: 8,
-        children: [],
-    })
+        children: [Player()],
+    });
 }
 
 function Right() {
@@ -39,7 +35,7 @@ function Right() {
         hpack: 'end',
         spacing: 8,
         children: [BacklightSlider(), VolumeSlider(), Sep(), Clock()],
-    })
+    });
 }
 
 function Bar(monitor) {
@@ -66,15 +62,15 @@ function Bar(monitor) {
         \*                                            */
         setup: (self) =>
             self.on('leave-notify-event', () => {
-                volume_reveal.value = false
-                brightness_reveal.value = false
+                volume_reveal.value = false;
+                brightness_reveal.value = false;
             }),
-    })
+    });
 }
 
 App.config({
     style: '/tmp/ags.css',
     windows: [Bar(0)],
-})
+});
 
-export { }
+export { };

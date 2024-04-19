@@ -11,4 +11,4 @@ export default {
         high: 'brightness-high-symbolic',
         low: 'brightness-low-symbolic',
     },
-}
+};
