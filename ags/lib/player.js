@@ -32,18 +32,35 @@ function PlayerLabel() {
 
 export function Player() {
     return Widget.EventBox({
-        child: Widget.Revealer({
-            setup: (self) =>
-                self.hook(mpris, () => {
-                    const reveal = mpris.getPlayer('');
-                    self.reveal_child = reveal;
+        child: Widget.Box({
+            spacing: 0,
+            children: [
+                Widget.Revealer({
+                    setup: (self) =>
+                        self.hook(mpris, () => {
+                            const reveal = mpris.getPlayer('');
+                            self.reveal_child = !reveal;
+                        }),
+                    transition_duration: 350,
+                    transition: 'slide_right',
+                    child: Widget.Label({
+                        label: '(^°○°)^',
+                    }),
                 }),
-            transition_duration: 350,
-            transition: 'slide_left',
-            child: Widget.Box({
-                vertical: false,
-                children: [PlayerLabel()],
-            }),
+                Widget.Revealer({
+                    setup: (self) =>
+                        self.hook(mpris, () => {
+                            const reveal = mpris.getPlayer('');
+                            self.reveal_child = reveal;
+                        }),
+                    transition_duration: 350,
+                    transition: 'slide_left',
+                    child: Widget.Box({
+                        vertical: false,
+                        children: [PlayerLabel()],
+                    }),
+                }),
+            ],
         }),
     });
 }
