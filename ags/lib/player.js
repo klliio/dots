@@ -1,22 +1,21 @@
 const mpris = await Service.import('mpris');
 
-let active_player = Variable(mpris.getPlayer());
+let active_player = Variable(mpris.getPlayer(''));
 mpris.connect('player-changed', (mpris, bus) => {
     mpris.getPlayer(bus).connect('changed', (player) => {
-        print('hook');
-        print(active_player.value.track_title);
         active_player.value = player;
+        print(active_player.value.track_title);
     });
 });
 
-function GetPlayer() {
+function GetActivePlayer() {
     if (active_player.value != null) {
         print('good');
     } else {
         print('bad');
     }
 
-    return active_player.value != null ? active_player.value : 'bad';
+    return active_player.value != null ? 'good' : 'bad';
 }
 
 function PlayerLabel() {
@@ -26,7 +25,7 @@ function PlayerLabel() {
         justification: 'left',
         wrap: false,
         use_markup: false,
-        label: GetPlayer(),
+        label: GetActivePlayer(),
     });
 }
 

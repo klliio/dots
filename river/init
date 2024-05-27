@@ -5,7 +5,7 @@ gnomeschema=org.gnome.desktop.interface
 gsettings set "$gnomeschema"
 gsettings set "$gnomeschema" cursor-theme Breeze_Obsidian
 gsettings set "$gnomeschema" color-scheme "prefer-dark" color-scheme "prefer-dark"
-gsettings set "$gnomeschema" gtk-theme "Catppuccin-mauve"
+gsettings set "$gnomeschema" gtk-theme "Catppuccin-Mocha-Standard-Mauve-Dark"
 gsettings set "$gnomeschema" font-name "UbuntuMono 11"
 riverctl xcursor-theme Breeze_Obsidian 30
 
@@ -17,6 +17,7 @@ riverctl input "$trackpad" pointer-accel -0.1
 riverctl input "$trackpad" natural-scroll disabled
 riverctl input "$trackpad" disable-while-typing enabled
 riverctl input "$trackpad" events disabled-on-external-mouse
+riverctl input "$trackpad" accel-profile flat
 
 mouse="pointer-1118-64-Microsoft_Microsoft_3-Button_Mouse_with_IntelliEye(TM)"
 riverctl keyboard-layout gb
@@ -84,35 +85,30 @@ riverctl map normal Super+Shift 0 set-view-tags $all_tags
 riverctl map normal Super F toggle-fullscreen
 riverctl map normal Super T toggle-float
 
-# scratchpad
-scratch_tag=$((1 << $tagnum))
+# scratchpads
+obsidian_scratchpad=$((1 << $tagnum))
+keepass_scratchpad=$((2 << $tagnum))
 
-# Toggle the scratchpad with Super+P
-riverctl map normal Super S toggle-focused-tags $scratch_tag
-
-# Send windows to the scratchpad with Super+Shift+P
-riverctl map normal Super+Shift S set-view-tags $scratch_tag
+# Toggle the scratchpad tags
+riverctl map normal Super+Shift O toggle-focused-tags $obsidian_scratchpad
+riverctl map normal Super+Shift P toggle-focused-tags $keepass_scratchpad
 
 # Set spawn tagmask to ensure new windows don"t have the scratchpad tag unless
 # explicitly set.
-all_but_scratch_tag=$(( ((1 << $tagnum) - 1) ^ $scratch_tag ))
-riverctl spawn-tagmask $all_but_scratch_tag
+all_but_scratch_tags=$(( ((1 << $tagnum) - 1) ^ $obsidian_scratchpad ))
+riverctl spawn-tagmask $all_but_scratch_tags
 
 # resizing
-riverctl declare-mode resize
-riverctl map normal Super+Shift R enter-mode resize
-riverctl map resize None Escape enter-mode normal
-riverctl map resize None Return enter-mode normal
-riverctl map resize Super+Shift H resize horizontal -100
-riverctl map resize Super+Shift J resize vertical 100
-riverctl map resize Super+Shift K resize vertical -100 
-riverctl map resize Super+Shift L resize horizontal 100
+riverctl declare-mode resize riverctl map normal Super+Shift R enter-mode resize riverctl map resize None Escape enter-mode normal riverctl map resize None Return enter-mode normal riverctl map resize Super+Shift H resize horizontal -50
+riverctl map resize Super+Shift J resize vertical 50
+riverctl map resize Super+Shift K resize vertical -50 
+riverctl map resize Super+Shift L resize horizontal 50
 
 # move views
-riverctl map resize None H move left 100
-riverctl map resize None J move down 100
-riverctl map resize None K move up 100
-riverctl map resize None L move right 100
+riverctl map resize None H move left 50
+riverctl map resize None J move down 50
+riverctl map resize None K move up 50
+riverctl map resize None L move right 50
 
 # controls windows with the cursor
 riverctl map-pointer resize None BTN_LEFT move-view
@@ -156,11 +152,12 @@ riverctl background-color 0x002b36
 riverctl border-color-focused 0xcba6f7
 riverctl border-color-unfocused 0xffffff00
 
-# spawn tags
-
-# floating windows
-riverctl float-filter-add app-id "imv"
-riverctl float-filter-add app-id "mpv"
+# Rules
+riverctl rule-add -app-id "org.keepassxc.KeePassXC" tags $keepass_scratchpad
+riverctl rule-add -app-id obsidian tags $obsidian_scratchpad
+riverctl rule-add -app-id imv float
+riverctl rule-add -app-id mpv float
+riverctl rule-add ssd
 
 # Set keyboard repeat rate
 riverctl set-repeat 50 300
@@ -168,7 +165,7 @@ riverctl set-repeat 50 300
 # Set the default layout generator to be rivertile and start it.
 # River will send the process group of the init executable SIGTERM on exit.
 riverctl default-layout rivertile
-rivertile -view-padding 6 -outer-padding 6 -main-location left -main-ratio 0.65 &
+rivertile -view-padding 6 -outer-padding 6 -main-location left -main-ratio 0.55 &
 
 # startup
 if [ ! "$(pgrep "pipewire")" ]; then
@@ -187,12 +184,18 @@ pkill "blueman-applet"
 pkill "mpd"
 pkill "syncthing"
 pkill "udiskie"
-pkill "waybar"
 
 wbg "$HOME"/Images/Wallpapers/Apocalypse.png &
 mako &
 blueman-applet &
-mpd "$HOME"/.config/mpd/mpd.conf &
 /usr/bin/syncthing serve --no-browser --logfile=default &
 udiskie --automount --notify &
-waybar &
+
+if [ ! "$(pgrep "keepassxc")" ]; then
+    keepassxc &
+fi
+
+if [ ! "$(pgrep "obsidian")" ]; then
+    flatpak run md.obsidian.Obsidian &
+fi
+
