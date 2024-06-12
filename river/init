@@ -5,7 +5,7 @@ gnomeschema=org.gnome.desktop.interface
 gsettings set "$gnomeschema"
 gsettings set "$gnomeschema" cursor-theme Breeze_Obsidian
 gsettings set "$gnomeschema" color-scheme "prefer-dark" color-scheme "prefer-dark"
-gsettings set "$gnomeschema" gtk-theme "Catppuccin-Mocha-Standard-Mauve-Dark"
+gsettings set "$gnomeschema" gtk-theme "Catppuccin-Mocha-Standard-Sapphire-Dark"
 gsettings set "$gnomeschema" font-name "UbuntuMono 11"
 riverctl xcursor-theme Breeze_Obsidian 30
 
@@ -13,7 +13,7 @@ riverctl xcursor-theme Breeze_Obsidian 30
 trackpad="pointer-2-7-SynPS/2_Synaptics_TouchPad"
 riverctl keyboard-layout gb
 riverctl input "$trackpad" tap enabled
-riverctl input "$trackpad" pointer-accel -0.1
+riverctl input "$trackpad" pointer-accel 0.1
 riverctl input "$trackpad" natural-scroll disabled
 riverctl input "$trackpad" disable-while-typing enabled
 riverctl input "$trackpad" events disabled-on-external-mouse
