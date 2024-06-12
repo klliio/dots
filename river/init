@@ -149,7 +149,7 @@ riverctl set-cursor-warp on-focus-change
 
 # Set background and border color
 riverctl background-color 0x002b36
-riverctl border-color-focused 0xcba6f7
+riverctl border-color-focused 0x74c7ec
 riverctl border-color-unfocused 0xffffff00
 
 # Rules
