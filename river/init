@@ -99,7 +99,12 @@ all_but_scratch_tags=$(( ((1 << $tagnum) - 1) ^ $obsidian_scratchpad ))
 riverctl spawn-tagmask $all_but_scratch_tags
 
 # resizing
-riverctl declare-mode resize riverctl map normal Super+Shift R enter-mode resize riverctl map resize None Escape enter-mode normal riverctl map resize None Return enter-mode normal riverctl map resize Super+Shift H resize horizontal -50
+riverctl declare-mode resize
+riverctl map normal Super+Shift R enter-mode resize
+riverctl map resize None Escape enter-mode normal
+riverctl map resize None Return enter-mode normal
+
+riverctl map resize Super+Shift H resize horizontal -50
 riverctl map resize Super+Shift J resize vertical 50
 riverctl map resize Super+Shift K resize vertical -50 
 riverctl map resize Super+Shift L resize horizontal 50
