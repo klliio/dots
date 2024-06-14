@@ -22,7 +22,7 @@ riverctl input "$trackpad" accel-profile flat
 mouse="pointer-1118-64-Microsoft_Microsoft_3-Button_Mouse_with_IntelliEye(TM)"
 riverctl keyboard-layout gb
 riverctl input "$mouse" tap enabled
-riverctl input "$mouse" pointer-accel -0.3
+riverctl input "$mouse" pointer-accel 0.1
 riverctl input "$mouse" natural-scroll disabled
 riverctl input "$mouse" disable-while-typing disabled
 riverctl input "$mouse" accel-profile flat
