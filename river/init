@@ -2,10 +2,10 @@
 
 # set keyboard layout and gtk
 gnomeschema=org.gnome.desktop.interface
-gsettings set "$gnomeschema"
 gsettings set "$gnomeschema" cursor-theme Breeze_Obsidian
 gsettings set "$gnomeschema" color-scheme "prefer-dark" color-scheme "prefer-dark"
 gsettings set "$gnomeschema" gtk-theme "Catppuccin-Mocha-Standard-Sapphire-Dark"
+gsettings set "$gnomeschema" icon-theme "Papirus-Dark"
 gsettings set "$gnomeschema" font-name "UbuntuMono 11"
 riverctl xcursor-theme Breeze_Obsidian 30
 
@@ -153,9 +153,9 @@ riverctl hide-cursor when-typing disabled
 riverctl set-cursor-warp on-focus-change
 
 # Set background and border color
-riverctl background-color 0x002b36
-riverctl border-color-focused 0x74c7ec
-riverctl border-color-unfocused 0xffffff00
+riverctl background-color 0x002b36ff
+riverctl border-color-focused 0x74c7ecff
+riverctl border-color-unfocused 0x1e1e2eff
 
 # Rules
 riverctl rule-add -app-id "org.keepassxc.KeePassXC" tags $keepass_scratchpad
@@ -190,7 +190,7 @@ pkill "mpd"
 pkill "syncthing"
 pkill "udiskie"
 
-wbg "$HOME"/Images/Wallpapers/Apocalypse.png &
+wbg "$HOME"/Images/Wallpapers/bocchi-vending.png &
 mako &
 blueman-applet &
 /usr/bin/syncthing serve --no-browser --logfile=default &
