@@ -1,76 +1,33 @@
-// compile, reset, apply
-Utils.exec(`sassc ${App.configDir}/style/main.scss /tmp/ags.css`);
+import GLib from 'gi://GLib';
+import { /*  windows, */ SetupWindows } from './windows.js';
+import Options from './options.js';
 
-// custom icons
-App.addIcons(`${App.configDir}/assets`);
+print(`[LOG] Config Dir: ${App.configDir}`);
 
-import { Sep } from './lib/sep.js';
-import { Battery_Bar, Battery_Circle } from './lib/battery.js';
-import { Clock } from './lib/date.js';
-import { Player } from './lib/player.js';
-import { VolumeSlider, BacklightSlider, volume_reveal, brightness_reveal } from './lib/sliders.js';
-
-// layout of the bar
-function Left() {
-    return Widget.Box({
-        class_name: 'left',
-        hpack: 'start',
-        spacing: 8,
-        children: [Battery_Circle(), Battery_Bar()],
-    });
+async function applyStyle() {
+    const COMPILED_STYLE_DIR = `${GLib.get_user_cache_dir()}/ags/user/generated`;
+    if (Options.recompileSass) {
+        Utils.exec(`mkdir -p ${COMPILED_STYLE_DIR}`);
+        Utils.exec(`sassc ${App.configDir}/scss/main.scss ${COMPILED_STYLE_DIR}/style.css`);
+    }
+    App.resetCss();
+    App.applyCss(`${COMPILED_STYLE_DIR}/style.css`);
+    print('[LOG] Styles loaded');
+    print(`[CRITICAL] Reload Sass option is set to: ${Options.recompileSass}`);
 }
-
-function Center() {
-    return Widget.Box({
-        class_name: 'center',
-        hpack: 'center',
-        spacing: 8,
-        children: [Player()],
-    });
-}
-
-function Right() {
-    return Widget.Box({
-        class_name: 'right',
-        hpack: 'end',
-        spacing: 8,
-        children: [BacklightSlider(), VolumeSlider(), Sep(), Clock()],
-    });
-}
-
-function Bar(monitor) {
-    return Widget.Window({
-        name: `bar-${monitor}`, // name has to be unique
-        class_name: 'bar',
-        monitor,
-        layer: 'bottom',
-        margins: [6, 6, 0, 6], // [top, right, bottom, left]
-        anchor: ['top', 'left', 'right'],
-        exclusivity: 'exclusive',
-        child: Widget.CenterBox({
-            start_widget: Left(),
-            center_widget: Center(),
-            end_widget: Right(),
-        }),
-
-        /*                                            *\
-            makes things that rely on on_hover_lost
-            behave when exiting the window
-
-            this is to make it so that padding around 
-            the window is not needed
-        \*                                            */
-        setup: (self) =>
-            self.on('leave-notify-event', () => {
-                volume_reveal.value = false;
-                brightness_reveal.value = false;
-            }),
-    });
-}
+applyStyle().catch(print);
 
 App.config({
-    style: '/tmp/ags.css',
-    windows: [Bar(0)],
-});
+    // windows: windows,
+    onConfigParsed: () => {
+        SetupWindows();
 
-export { };
+        Utils.monitorFile(
+            // directory that contains the scss files
+            `${App.configDir}/scss`,
+            function() {
+                applyStyle();
+            }
+        );
+    },
+});
