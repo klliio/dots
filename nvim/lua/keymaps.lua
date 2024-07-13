@@ -18,6 +18,7 @@ mappings.nav = {
 mappings.custom = {
     [{ { "n" }, "<leader>yy" }] = { ":%y+<CR><CR>", { silent = true, remap = false, desc = "Yank the Entire Buffer" } },
     [{ { "n" }, "<S-o>" }] = { "^i<CR><Esc>k^i", { silent = true, remap = false, desc = "Insert Line Above" } },
+    [{ { "n" }, "<C-c>" }] = { ":bp|bd #<CR>", { silent = true, remap = false, desc = "Close Buffer but Keep the Split" } },
     [{ { "n" }, "q:" }] = { "<Nop>" },
     [{ { "n" }, "<space>" }] = { "<Nop>" },
     [{ { "n" }, "<leader>cc" }] = { function()
