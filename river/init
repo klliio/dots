@@ -53,8 +53,8 @@ riverctl map normal Super R spawn "rofi -show run"
 riverctl map normal Super Return spawn "alacritty"
 
 riverctl map normal None Print spawn "grim $HOME/Images/Screenshots/$(date +%Y-%m-%dT%H-%M-%S%z).jpg && notify-send -a grim Screenshot 'Saved as $(date +%Y-%m-%dT%H-%M-%S%z).jpg'"
-riverctl map normal Super Print spawn "$HOME/.config/scripts/rofi-grim.sh"
-riverctl map normal Super+Shift Print spawn "$HOME/.config/scripts/rofi-wf-recorder.sh"
+riverctl map normal Super Print spawn "$HOME/.config/scripts/rofi-grim.sh -c 74C7EC"
+riverctl map normal Super+Shift Print spawn "$HOME/.config/scripts/rofi-wf-recorder.sh -c 74C7EC"
 riverctl map normal Super I spawn "$HOME/.config/scripts/images.sh"
 
 # workspaces/tags

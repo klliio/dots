@@ -14,7 +14,22 @@ if [ -n "$(pgrep wf-recorder)" ]; then
 	exit 1
 fi
 
-screencapture_dir="$HOME/Videos/ScreenCaptures/"
+background="FFFFFF46"
+border="00000076"
+select="00000010"
+while [ "$#" -gt 0 ]; do
+    arg="$1"
+    case "$1" in
+        --*'='*) shift; set -- "${arg%%=*}" "${arg#*=}" "$@"; continue;;
+        -b) shift; background="$1";;
+        -c) shift; border="$1";;
+        -s) shift; select="$1";;
+        *) break;;
+    esac
+    shift
+done
+
+screencapture_dir="$HOME/Videos/"
 
 while true; do
     # Use Rofi prompt to ask for a file name
@@ -52,8 +67,8 @@ selection=$(printf "Region\nFullscreen" | rofi -dmenu -p "Selection type")
 case "$selection" in
 	"Region") 
 		# use slurp to get the selection area
-		wf-recorder --geometry "$(slurp)" -f "$screencapture_dir$file_name.mp4" --no-damage --framerate 60 ;;
-	"Fullscreen") wf-recorder -f "$screencapture_dir$file_name.mp4" --no-damage --framerate 60 ;;
+		wf-recorder --geometry "$(slurp -d -b $background -c $border -s $select)" -f "$screencapture_dir$file_name.mkv" --no-damage --framerate 60 ;;
+	"Fullscreen") wf-recorder -f "$screencapture_dir$file_name.mkv" --no-damage --framerate 60 ;;
 		*) exit 1 ;;
 esac
 notify-send -a rofi-wf-recorder "Screen Capture" "Started capture as $file_name.mp4"

@@ -14,6 +14,21 @@ if [ "$1" = --quick ]; then
     grim "$scrshotDir$time.png"
     notify-send -a rofi-grim -i "$scrshotDir$time.png" "Screenshot" "Saved as $time.png"
 else
+    background="FFFFFF46"
+    border="00000076"
+    select="00000010"
+    while [ "$#" -gt 0 ]; do
+        arg="$1"
+        case "$1" in
+            --*'='*) shift; set -- "${arg%%=*}" "${arg#*=}" "$@"; continue;;
+            -b) shift; background="$1";;
+            -c) shift; border="$1";;
+            -s) shift; select="$1";;
+            *) break;;
+        esac
+        shift
+    done
+
     # Take a screenshot using grim command and save it with a temporary file name
     tmp_file=$(mktemp /tmp/screenshot_XXXXXX.png)
 
@@ -21,7 +36,7 @@ else
     case "$selection" in
         "Region") 
             # use slurp to get the selection area
-            grim -g "$(slurp)" -t jpeg -q 100 "$tmp_file"
+            grim -g "$(slurp -d -b $background -c $border -s $select)" -t jpeg -q 100 "$tmp_file"
             ;;
         "Fullscreen") grim -t jpeg -q 100 "$tmp_file" ;;
         *) exit 1 ;;
