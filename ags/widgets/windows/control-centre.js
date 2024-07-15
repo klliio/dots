@@ -142,5 +142,4 @@ const ControlCentre = () =>
 
 export default function() {
     App.addWindow(ControlCentre());
-    App.toggleWindow(WINDOW_NAME);
 }

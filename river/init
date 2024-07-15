@@ -27,7 +27,6 @@ riverctl input "$mouse" natural-scroll disabled
 riverctl input "$mouse" disable-while-typing disabled
 riverctl input "$mouse" accel-profile flat
 
-
 # keybinds #################################################################
 riverctl map normal Super+Shift Q exit
 riverctl map normal Super Q spawn "$HOME/.config/river/init"
@@ -60,21 +59,20 @@ riverctl map normal Super V spawn "$HOME/.config/scripts/videos.sh"
 
 # workspaces/tags
 tagnum=9
-for i in $(seq 1 "$tagnum")
-do
-    tags=$((1 << ($i - 1)))
+for i in "$(seq 1 "$tagnum")"; do
+	tags=$((1 << ($i - 1)))
 
-    # Super+[1-9] to focus tag [0-8]
-    riverctl map normal Super "$i" set-focused-tags $tags
+	# Super+[1-9] to focus tag [0-8]
+	riverctl map normal Super "$i" set-focused-tags $tags
 
-    # Super+Shift+[1-9] to tag focused view with tag [0-8]
-    riverctl map normal Super+Shift "$i" set-view-tags $tags
+	# Super+Shift+[1-9] to tag focused view with tag [0-8]
+	riverctl map normal Super+Shift "$i" set-view-tags $tags
 
-    # Super+Control+[1-9] to toggle focus of tag [0-8]
-    riverctl map normal Super+Control "$i" toggle-focused-tags $tags
+	# Super+Control+[1-9] to toggle focus of tag [0-8]
+	riverctl map normal Super+Control "$i" toggle-focused-tags $tags
 
-    # Super+Shift+Control+[1-9] to toggle tag [0-8] of focused view
-    riverctl map normal Super+Shift+Control "$i" toggle-view-tags $tags
+	# Super+Shift+Control+[1-9] to toggle tag [0-8] of focused view
+	riverctl map normal Super+Shift+Control "$i" toggle-view-tags $tags
 done
 
 # Super+0 to focus all tags
@@ -96,7 +94,7 @@ riverctl map normal Super+Shift P toggle-focused-tags $keepass_scratchpad
 
 # Set spawn tagmask to ensure new windows don"t have the scratchpad tag unless
 # explicitly set.
-all_but_scratch_tags=$(( ((1 << $tagnum) - 1) ^ $obsidian_scratchpad ))
+all_but_scratch_tags=$((((1 << $tagnum) - 1) ^ $obsidian_scratchpad))
 riverctl spawn-tagmask $all_but_scratch_tags
 
 # resizing
@@ -107,7 +105,7 @@ riverctl map resize None Return enter-mode normal
 
 riverctl map resize Super+Shift H resize horizontal -50
 riverctl map resize Super+Shift J resize vertical 50
-riverctl map resize Super+Shift K resize vertical -50 
+riverctl map resize Super+Shift K resize vertical -50
 riverctl map resize Super+Shift L resize horizontal 50
 
 # move views
@@ -176,16 +174,17 @@ rivertile -view-padding 0 -outer-padding 0 -main-location left -main-ratio 0.55 
 # startup
 if [ ! "$(pgrep "pipewire")" ]; then
 	pipewire &
-    wireplumber &
+	wireplumber &
 	pipewire-pulse &
 fi
 
 if [ ! "$(pgrep "polkit-gnome")" ]; then
-    /usr/libexec/polkit-gnome-authentication-agent-1 &
+	/usr/libexec/polkit-gnome-authentication-agent-1 &
 fi
 
 pkill "wbg"
 pkill "mako"
+pkill "ags"
 pkill "blueman-applet"
 pkill "mpd"
 pkill "syncthing"
@@ -193,15 +192,15 @@ pkill "udiskie"
 
 wbg "$HOME"/Images/Wallpapers/bocchi-vending.png &
 mako &
+ags &
 blueman-applet &
 /usr/bin/syncthing serve --no-browser --logfile=default &
 udiskie --automount --notify &
 
 if [ ! "$(pgrep "keepassxc")" ]; then
-    keepassxc &
+	keepassxc &
 fi
 
 if [ ! "$(pgrep "obsidian")" ]; then
-    flatpak run md.obsidian.Obsidian &
+	flatpak run md.obsidian.Obsidian &
 fi
-
